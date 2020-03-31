@@ -7,11 +7,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainPresenter(private val mainView: MainView) {
+class MainPresenter(
+    private val mainView: MainView,
+    private val movieRoute: MovieRoute
+) {
     fun getDiscoverMovie(){
         mainView.showLoading()
-
-        val movieRoute = RetrofitModule.connect().create(MovieRoute::class.java)
 
         movieRoute.discoverMovie().enqueue(object: Callback<MovieResponse> {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {

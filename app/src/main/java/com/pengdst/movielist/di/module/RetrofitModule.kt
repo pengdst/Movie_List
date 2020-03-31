@@ -14,21 +14,17 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun connect(): Retrofit {
+    fun connect(client: OkHttpClient): Retrofit {
         return Retrofit.Builder().apply {
                 baseUrl(BuildConfig.BASE_URL)
                 client(client)
                 addConverterFactory(GsonConverterFactory.create())
-            }.build();
-//        return Retrofit.Builder()
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .baseUrl(ConstantHelpers.BASE_URL)
-//            .build();
+            }.build()
     }
 
     @Provides
     @Singleton
-    fun httpClient():OkHttpClient{
+    fun httpClient(interceptor: HttpLoggingInterceptor):OkHttpClient{
         return OkHttpClient.Builder().apply {
             retryOnConnectionFailure(true)
             addInterceptor(interceptor)

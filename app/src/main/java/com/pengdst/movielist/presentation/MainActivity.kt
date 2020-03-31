@@ -10,21 +10,23 @@ import com.pengdst.movielist.R
 import com.pengdst.movielist.adapters.MovieAdapter
 import com.pengdst.movielist.datas.models.Movie
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainView {
+    @Inject
+    lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val moviePresenter = MainPresenter(this)
-        moviePresenter.getDiscoverMovie()
+        presenter.getDiscoverMovie()
     }
 
     override fun onSuccess(result: List<Movie>) {
         rv_movies.addItemDecoration(DividerItemDecoration(this@MainActivity,DividerItemDecoration.VERTICAL))
         rv_movies.layoutManager = LinearLayoutManager(this@MainActivity)
-        rv_movies.adapter = MovieAdapter(result ?: emptyList())
+        rv_movies.adapter = MovieAdapter(result)
     }
 
     override fun showLoading() {

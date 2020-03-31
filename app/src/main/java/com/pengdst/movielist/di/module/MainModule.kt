@@ -16,7 +16,7 @@ abstract class MainModule {
     companion object{
         @JvmStatic
         @Provides
-        fun provideMovieRoute(retrofit: Retrofit) =
+        fun provideMovieRoute(retrofit: Retrofit): MovieRoute =
             retrofit.create(MovieRoute::class.java)
 
         @JvmStatic
@@ -24,7 +24,7 @@ abstract class MainModule {
         fun provideMainPresenter(
             mainView: MainView,
             movieRoute: MovieRoute
-        ):MainPresenter = MainPresenter(mainView, movieRoute)
+        ): MainPresenter = MainPresenter(mainView, movieRoute)
     }
 
     @Binds

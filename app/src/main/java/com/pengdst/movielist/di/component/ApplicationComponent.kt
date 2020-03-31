@@ -4,7 +4,6 @@ import com.pengdst.movielist.MainApp
 import com.pengdst.movielist.di.builder.ActivityBuilder
 import com.pengdst.movielist.di.module.RetrofitModule
 import dagger.Component
-import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
