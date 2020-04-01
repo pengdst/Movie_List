@@ -21,8 +21,7 @@ class MainPresenter(
 
         movieRoute.discoverMovie()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {response ->
+            .subscribe({ response ->
                     mainView.hideLoading()
                     mainView.onSuccess(response.results)
                 }, {error ->

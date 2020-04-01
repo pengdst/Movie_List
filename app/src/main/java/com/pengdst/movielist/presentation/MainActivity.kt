@@ -42,4 +42,8 @@ class MainActivity : DaggerAppCompatActivity(), MainView {
         pg_movie.visibility = View.GONE
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDettach()
+    }
 }
