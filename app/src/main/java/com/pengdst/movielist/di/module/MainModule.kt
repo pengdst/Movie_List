@@ -14,6 +14,7 @@ abstract class MainModule {
 
     @Module
     companion object{
+
         @JvmStatic
         @Provides
         fun provideMovieRoute(retrofit: Retrofit): MovieRoute =

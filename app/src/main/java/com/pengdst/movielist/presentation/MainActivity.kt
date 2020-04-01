@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pengdst.movielist.R
 import com.pengdst.movielist.adapters.MovieAdapter
 import com.pengdst.movielist.datas.models.Movie
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : DaggerAppCompatActivity(), MainView {
     @Inject
     lateinit var presenter: MainPresenter
 
