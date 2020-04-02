@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_movies"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.pengdst.movielist.presentation.mvvm.MainViewModel" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"/>
+        tools:context=".presentation.MainActivity">
 
-    <ProgressBar
-        android:id="@+id/pg_movie"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:indeterminate="true"
-        android:padding="60dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_movies"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"/>
 
-</FrameLayout>
+        <ProgressBar
+            android:id="@+id/pg_movie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.progressBarVisibility}"
+            android:scrollbars="vertical"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:indeterminate="true"
+            android:padding="60dp"/>
+
+    </FrameLayout>
+
+</layout>

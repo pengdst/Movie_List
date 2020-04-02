@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class Movie (
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("overview")
-    val overview: String?
+    val overview: String
 )
 
 data class MovieResponse (
