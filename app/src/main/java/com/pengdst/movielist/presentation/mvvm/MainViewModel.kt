@@ -3,6 +3,7 @@ package com.pengdst.movielist.presentation.mvvm
 import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import androidx.databinding.library.baseAdapters.BR
 import com.pengdst.movielist.datas.routes.MovieRoute
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -19,17 +20,17 @@ class MainViewModel(
 
     override fun discoverMovie() {
         progressBarVisibility = View.VISIBLE
-        notifyPropertyChanged(progressBarVisibility)
+        notifyPropertyChanged(BR.progressBarVisibility)
 
         movieRoute.discoverMovie()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 progressBarVisibility = View.GONE
-                notifyPropertyChanged(progressBarVisibility)
+                notifyPropertyChanged(BR.progressBarVisibility)
                 callback.onSuccess(response.results)
             }, {error ->
                 progressBarVisibility = View.GONE
-                notifyPropertyChanged(progressBarVisibility)
+                notifyPropertyChanged(BR.progressBarVisibility)
                 callback.onFailed(error)
             }
             ).addTo(disposable)

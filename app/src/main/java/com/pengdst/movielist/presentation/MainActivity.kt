@@ -1,9 +1,7 @@
 package com.pengdst.movielist.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,10 +31,10 @@ class MainActivity : DaggerAppCompatActivity(), MainViewModelCallback {
             .also { viewModel.discoverMovie() }
     }
 
-    override fun onSuccess(result: List<Movie>) {
+    override fun onSuccess(results: List<Movie>) {
         binding.rvMovies.addItemDecoration(DividerItemDecoration(this@MainActivity,DividerItemDecoration.VERTICAL))
         binding.rvMovies.layoutManager = LinearLayoutManager(this@MainActivity)
-        binding.rvMovies.adapter = MovieAdapter(result)
+        binding.rvMovies.adapter = MovieAdapter(results)
     }
 
     override fun onFailed(error: Throwable) {
