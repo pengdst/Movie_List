@@ -4,7 +4,7 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.pengdst.movielist.datas.models.Movie
 
-class MainAdapterViewModel(movie: Movie): BaseObservable() {
+class MovieAdapterViewModel(movie: Movie): BaseObservable() {
     val title: String = movie.title
     @Bindable get
 

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.pengdst.movielist.presentation.mvvm.MainAdapterViewModel" />
+            type="com.pengdst.movielist.presentation.mvvm.MovieAdapterViewModel" />
     </data>
     
     <androidx.cardview.widget.CardView
