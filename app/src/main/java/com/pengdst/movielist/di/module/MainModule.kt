@@ -22,11 +22,10 @@ abstract class MainModule {
         @JvmStatic
         @Provides
         fun provideMainViewModel(
-            callback: MainViewModelCallback,
             movieRoute: MovieRoute
-        ): MainViewModel = MainViewModel(callback, movieRoute)
+        ): MainViewModel = MainViewModel(movieRoute)
     }
 
     @Binds
-    abstract fun bindMainViewModelCallback(activity: MainActivity): MainViewModelCallback
+    abstract fun bindMainViewModel(activity: MainActivity): MainViewModel
 }
