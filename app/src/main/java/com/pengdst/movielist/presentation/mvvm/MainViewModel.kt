@@ -11,7 +11,6 @@ import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private val callback: MainViewModelCallback,
     private val movieRoute: MovieRoute
 ): ViewModel(), MainView {
 

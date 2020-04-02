@@ -10,7 +10,6 @@ import com.pengdst.movielist.adapters.MovieAdapter
 import com.pengdst.movielist.databinding.ActivityMainBinding
 import com.pengdst.movielist.datas.models.Movie
 import com.pengdst.movielist.presentation.mvvm.MainViewModel
-import com.pengdst.movielist.presentation.mvvm.MainViewModelCallback
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
