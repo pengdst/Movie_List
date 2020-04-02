@@ -2,6 +2,7 @@ package com.pengdst.movielist.presentation.mvvm
 
 import android.view.View
 import androidx.databinding.library.baseAdapters.BR
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pengdst.movielist.datas.routes.MovieRoute
@@ -15,20 +16,23 @@ class MainViewModel @Inject constructor(
 ): ViewModel(), MainView {
 
     private val disposable: CompositeDisposable = CompositeDisposable()
-    private val observable: MutableLiveData<MainViewState>
+    private val observer = MutableLiveData<MainViewState>()
 
     override fun discoverMovie() {
         movieRoute.discoverMovie()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ response ->
-                callback.onSuccess(response.results)
-            }, {error ->
-                callback.onFailed(error)
-            }
-            ).addTo(disposable)
+            .map<MainViewState>(MainViewState::Success)
+            .onErrorReturn(MainViewState::Error)
+            .toFlowable()
+            .startWith(MainViewState.loading)
+            .subscribe(observer::postValue)
+            .let (disposable::add)
     }
 
-    override fun onDetach() {
+    override val state: LiveData<MainViewState>
+        get() = observer
+
+    override fun onCleared() {
+        super.onCleared()
         disposable.clear()
     }
 }
