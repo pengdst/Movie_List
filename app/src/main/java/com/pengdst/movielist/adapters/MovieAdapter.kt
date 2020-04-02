@@ -4,40 +4,35 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.pengdst.movielist.R
+import com.pengdst.movielist.databinding.MovieItemBinding
 import com.pengdst.movielist.datas.models.Movie
+import com.pengdst.movielist.presentation.mvvm.MainAdapterViewModel
 
 
 class MovieAdapter(var movies: List<Movie>): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
-            LayoutInflater
-                .from(parent.context)
-                .inflate(
-                    R.layout.movie_item,
-                    parent,
-                    false
-                )
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.movie_item,
+                parent,
+                false
+            )
         )
     }
 
     override fun getItemCount(): Int = movies.count()
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(movies.get(position))
-    }
-
-    inner class MovieViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        fun bind(movie: Movie) {
-            with(itemView){
-                val title = findViewById<TextView>(R.id.tv_title)
-                val overview = findViewById<TextView>(R.id.tv_overview)
-
-                title.text = movie.title
-                overview.text = movie.overview
-            }
+        holder.binding.apply {
+            viewModel = MainAdapterViewModel(movies[holder.adapterPosition])
+            executePendingBindings()
         }
     }
+
+    inner class MovieViewHolder(val binding: MovieItemBinding): RecyclerView.ViewHolder(binding.root)
 }

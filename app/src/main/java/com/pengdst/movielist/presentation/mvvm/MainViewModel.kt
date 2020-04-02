@@ -17,6 +17,7 @@ class MainViewModel(
     @Bindable get
 
     private val disposable: CompositeDisposable = CompositeDisposable()
+
     override fun discoverMovie() {
         progressBarVisibility = View.VISIBLE
         notifyPropertyChanged(progressBarVisibility)
