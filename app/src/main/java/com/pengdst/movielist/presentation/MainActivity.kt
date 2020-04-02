@@ -4,46 +4,47 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pengdst.movielist.R
 import com.pengdst.movielist.adapters.MovieAdapter
+import com.pengdst.movielist.databinding.ActivityMainBinding
 import com.pengdst.movielist.datas.models.Movie
+import com.pengdst.movielist.presentation.mvvm.MainViewModel
+import com.pengdst.movielist.presentation.mvvm.MainViewModelCallback
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity(), MainView {
+class MainActivity : DaggerAppCompatActivity(), MainViewModelCallback {
     @Inject
-    lateinit var presenter: MainPresenter
+    lateinit var viewModel: MainViewModel
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        presenter.getDiscoverMovie()
+        binding = DataBindingUtil.setContentView<ActivityMainBinding>(
+            this,
+            R.layout.activity_main)
+            .apply { viewModel = this@MainActivity.viewModel }
+            .also { viewModel.discoverMovie() }
     }
 
     override fun onSuccess(result: List<Movie>) {
-        rv_movies.addItemDecoration(DividerItemDecoration(this@MainActivity,DividerItemDecoration.VERTICAL))
-        rv_movies.layoutManager = LinearLayoutManager(this@MainActivity)
-        rv_movies.adapter = MovieAdapter(result)
-    }
-
-    override fun showLoading() {
-        pg_movie.visibility = View.VISIBLE
+        binding.rvMovies.addItemDecoration(DividerItemDecoration(this@MainActivity,DividerItemDecoration.VERTICAL))
+        binding.rvMovies.layoutManager = LinearLayoutManager(this@MainActivity)
+        binding.rvMovies.adapter = MovieAdapter(result)
     }
 
     override fun onFailed(error: Throwable) {
         Log.e(MainActivity::class.java.simpleName, "${error.printStackTrace()}")
     }
 
-    override fun hideLoading() {
-        pg_movie.visibility = View.GONE
-    }
-
     override fun onDestroy() {
         super.onDestroy()
-        presenter.onDettach()
+        viewModel.onDetach()
     }
 }
