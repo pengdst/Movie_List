@@ -3,7 +3,6 @@ package com.pengdst.movielist.presentation.mvvm
 import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.pengdst.movielist.BR
 import com.pengdst.movielist.datas.routes.MovieRoute
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
