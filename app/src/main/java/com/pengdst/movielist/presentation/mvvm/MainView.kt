@@ -1,6 +1,6 @@
 package com.pengdst.movielist.presentation.mvvm
 
-interface HomeView {
+interface MainView {
     fun discoverMovie()
     fun onDetach()
 }

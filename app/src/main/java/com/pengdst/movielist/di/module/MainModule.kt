@@ -2,8 +2,6 @@ package com.pengdst.movielist.di.module
 
 import com.pengdst.movielist.datas.routes.MovieRoute
 import com.pengdst.movielist.presentation.MainActivity
-import com.pengdst.movielist.presentation.MainPresenter
-import com.pengdst.movielist.presentation.MainView
 import com.pengdst.movielist.presentation.mvvm.MainViewModel
 import com.pengdst.movielist.presentation.mvvm.MainViewModelCallback
 import dagger.Binds
