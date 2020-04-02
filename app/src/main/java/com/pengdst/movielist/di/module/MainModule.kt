@@ -31,5 +31,5 @@ abstract class MainModule {
     }
 
     @Binds
-    abstract fun bindMainView(activity: MainActivity): MainView
+    abstract fun bindMainViewModelCallback(activity: MainActivity): MainViewModelCallback
 }
