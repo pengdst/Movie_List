@@ -36,6 +36,7 @@ class MainActivity : DaggerAppCompatActivity() {
             when(state){
                 is MainViewState.loading -> pg_movie.visibility = View.VISIBLE
                 is MainViewState.Success -> {
+                    pg_movie.visibility = View.GONE
                     rv_movies.addItemDecoration(DividerItemDecoration(this@MainActivity,DividerItemDecoration.VERTICAL))
                     rv_movies.layoutManager = LinearLayoutManager(this@MainActivity)
                     rv_movies.adapter = MovieAdapter(state.response.results)
